@@ -1,0 +1,30 @@
+{
+  "name": "esmodule",
+  "version": "0.0.1",
+  "description": "ES object assembler library",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aristov/esmodule.git"
+  },
+  "keywords": [
+    "Assembler",
+    "instance",
+    "target",
+    "assemble",
+    "create",
+    "init",
+    "assign",
+    "interface",
+    "properties"
+  ],
+  "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aristov/esmodule/issues"
+  },
+  "homepage": "https://github.com/aristov/esmodule#readme"
+}
