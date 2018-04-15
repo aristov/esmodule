@@ -18,8 +18,7 @@
     "create",
     "init",
     "assign",
-    "interface",
-    "properties"
+    "interface"
   ],
   "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
   "license": "MIT",
