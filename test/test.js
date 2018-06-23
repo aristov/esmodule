@@ -13,7 +13,7 @@ Example.prototype.bar = null
 class ExampleAssembler extends Assembler {
     create(init) {
         if(init && init.constructor === Object && init.hasOwnProperty('target')) {
-            this.setInstanceOf(init.target)
+            this.constructor.setTargetOf(this, init.target)
         }
         else super.create(init)
     }
