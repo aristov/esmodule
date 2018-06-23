@@ -4,7 +4,7 @@
   "description": "ES object assembler library",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc ava"
   },
   "repository": {
     "type": "git",
@@ -14,10 +14,10 @@
     "Assembler",
     "instance",
     "target",
-    "assemble",
     "create",
     "init",
     "assign",
+    "property",
     "interface"
   ],
   "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
@@ -25,5 +25,43 @@
   "bugs": {
     "url": "https://github.com/aristov/esmodule/issues"
   },
-  "homepage": "https://github.com/aristov/esmodule#readme"
+  "homepage": "https://github.com/aristov/esmodule#readme",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "nyc": "^12.0.2"
+  },
+  "ava": {
+    "verbose": true
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "ignore": "test.js",
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      },
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "report-dir": "dist/coverage"
+  }
 }

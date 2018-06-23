@@ -1,9 +1,7 @@
 .DS_Store
 .idea/
+.nyc_output
 node_modules
 npm-debug.log
 /dist
-/docs/build
-/coverage
 /tmp
-.nyc_output
