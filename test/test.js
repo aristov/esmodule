@@ -11,6 +11,10 @@ Example.prototype.foo = null
 Example.prototype.bar = null
 
 class ExampleAssembler extends Assembler {
+    setPropertyFilter(name) {
+        return super.setPropertyFilter(name) && name !== 'nom'
+    }
+
     set foo(foo) {
         this.target.foo = foo
     }
@@ -27,12 +31,12 @@ class ExampleAssembler extends Assembler {
         return 'foo'
     }
 
-    static get interface() {
-        return Example
-    }
-
     static get targetPropertyName() {
         return 'target'
+    }
+
+    static get interface() {
+        return Example
     }
 }
 
@@ -98,6 +102,13 @@ test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
     const instance = new ExampleAssembler
     t.throws(() => instance.setProperty('wiz', '789'))
     t.throws(() => instance.setProperty('wiz', undefined))
+})
+
+test('Assign filtered property', t => {
+    const instance = new ExampleAssembler
+    instance.assign({ nom : '777' })
+    t.is(instance.nom, undefined)
+    t.is(instance.target.nom, undefined)
 })
 
 test('Init by defined properties', t => {
