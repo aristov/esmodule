@@ -11,25 +11,16 @@ Example.prototype.foo = null
 Example.prototype.bar = null
 
 class ExampleAssembler extends Assembler {
-    create(init) {
-        if(init && init.constructor === Object && init.hasOwnProperty('target')) {
-            this.constructor.setTargetOf(this, init.target)
-        }
-        else super.create(init)
-    }
-
-    assign(init) {
-        if(!init.hasOwnProperty('target')) {
-            super.assign(init)
-        }
-    }
-
     set foo(foo) {
-        getTargetOf(this).foo = foo
+        this.target.foo = foo
     }
 
     get foo() {
-        return getTargetOf(this).foo
+        return this.target.foo
+    }
+
+    get target() {
+        return getTargetOf(this)
     }
 
     static get defaultPropertyName() {
@@ -38,6 +29,10 @@ class ExampleAssembler extends Assembler {
 
     static get interface() {
         return Example
+    }
+
+    static get targetPropertyName() {
+        return 'target'
     }
 }
 
@@ -75,28 +70,28 @@ test('setProperty(name, new String)', t => {
     const instance = new ExampleAssembler
     instance.setProperty('foo', '123')
     t.is(instance.foo, '123')
-    t.is(getTargetOf(instance).foo, '123')
+    t.is(instance.target.foo, '123')
 })
 
 test('setProperty(name, undefined)', t => {
     const instance = new ExampleAssembler
     instance.setProperty('foo', undefined)
     t.is(instance.foo, null)
-    t.is(getTargetOf(instance).foo, null)
+    t.is(instance.target.foo, null)
 })
 
 test('setProperty(name, new String) -> setPropertyFallback', t => {
     const instance = new ExampleAssembler
     instance.setProperty('bar', '456')
     t.is(instance.bar, undefined)
-    t.is(getTargetOf(instance).bar, '456')
+    t.is(instance.target.bar, '456')
 })
 
 test('setProperty(name, undefined) -> setPropertyFallback', t => {
     const instance = new ExampleAssembler
     instance.setProperty('bar', undefined)
     t.is(instance.bar, undefined)
-    t.is(getTargetOf(instance).bar, null)
+    t.is(instance.target.bar, null)
 })
 
 test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
@@ -107,15 +102,14 @@ test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
 
 test('Init by defined properties', t => {
     const instance = new ExampleAssembler
-    const target = getTargetOf(instance)
     instance.init({
         foo : '123',
         bar : '456'
     })
     t.is(instance.foo, '123')
-    t.is(target.foo, '123')
+    t.is(instance.target.foo, '123')
     t.is(instance.bar, undefined)
-    t.is(target.bar, '456')
+    t.is(instance.target.bar, '456')
 })
 
 test('Init by not defined property', t => {
@@ -127,13 +121,13 @@ test('Init by the default property', t => {
     const instance = new ExampleAssembler
     instance.init('123')
     t.is(instance.foo, '123')
-    t.is(getTargetOf(instance).foo, '123')
+    t.is(instance.target.foo, '123')
     t.deepEqual(getTargetOf(new Assembler('will be ignored')), {})
 })
 
 test('Init by explicit target setting', t => {
     const target = new Example
     const instance = new ExampleAssembler({ target })
-    t.is(getTargetOf(instance), target)
+    t.is(instance.target, target)
     t.throws(() => new ExampleAssembler({ target : 'wrong' }))
 })
