@@ -4,7 +4,8 @@
   "description": "ES object assembler library",
   "main": "lib/index.js",
   "scripts": {
-    "test": "nyc ava"
+    "test": "nyc ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,8 @@
     "init",
     "assign",
     "property",
+    "fallback",
+    "mismatch",
     "interface"
   ],
   "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
@@ -31,6 +34,7 @@
     "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "coveralls": "^3.0.1",
     "nyc": "^12.0.2"
   },
   "ava": {

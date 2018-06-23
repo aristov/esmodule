@@ -10,13 +10,13 @@ Assembler is a simple class, which helps to assemble another JavaScript objects.
 npm install esmodule
 ```
 
-## Development
+## Testing
 
 ```
 git clone git@github.com:aristov/esmodule.git
 cd esmodule
 npm install
-npm run webpack
+npm test
 ```
 
 ## License
