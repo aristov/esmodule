@@ -54,7 +54,7 @@ test('create', t => {
 
 test('getTargetOf', t => {
     const obj = {}
-    t.is(Assembler.getTargetOf(obj), obj)
+    t.is(Assembler.getTargetOf(obj), null)
 })
 
 test('getInstanceOf', t => {
@@ -66,6 +66,7 @@ test('new Assembler + getTargetOf + getInstanceOf', t => {
     const target = Assembler.getTargetOf(instance)
     t.deepEqual(target, {})
     t.true(target instanceof Assembler.interface)
+    t.is(Assembler.getTargetOf(target), target)
     t.is(Assembler.getInstanceOf(target), instance)
     t.is(Assembler.getInstanceOf(instance), instance)
 })
