@@ -2,7 +2,13 @@
   "name": "esmodule",
   "version": "0.0.2",
   "description": "ES object assembler library",
-  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "main": "lib",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "test": "nyc ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
