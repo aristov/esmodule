@@ -31,10 +31,6 @@ class ExampleAssembler extends Assembler {
         return 'foo'
     }
 
-    static get targetPropertyName() {
-        return 'target'
-    }
-
     static get interface() {
         return Example
     }
@@ -58,7 +54,7 @@ test('getTargetOf', t => {
 })
 
 test('getInstanceOf', t => {
-    t.is(Assembler.getInstanceOf({}), null)
+    t.true(Assembler.getInstanceOf({}) instanceof Assembler)
 })
 
 test('new Assembler + getTargetOf + getInstanceOf', t => {
