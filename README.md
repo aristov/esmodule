@@ -1,4 +1,4 @@
-# esmodule
+# ES Module
 
 [![NPM Version](https://img.shields.io/npm/v/esmodule.svg)](https://www.npmjs.com/package/esmodule)
 [![Build Status](https://travis-ci.org/aristov/esmodule.svg?branch=master)](https://travis-ci.org/aristov/esmodule)
