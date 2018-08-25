@@ -1,6 +1,6 @@
 {
   "name": "esmodule",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "ES object assembler library",
   "files": [
     "lib"
