@@ -1,5 +1,5 @@
 import test from 'ava'
-import { Assembler } from '../lib/assembler'
+import { Assembler } from '../lib/Assembler'
 
 let undefined
 
