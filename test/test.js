@@ -102,15 +102,13 @@ test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
 })
 
 test('Assign filtered property', t => {
-    const instance = new ExampleAssembler
-    instance.assign({ nom : '777' })
+    const instance = new ExampleAssembler({ nom : '777' })
     t.is(instance.nom, undefined)
     t.is(instance.target.nom, undefined)
 })
 
 test('Init by defined properties', t => {
-    const instance = new ExampleAssembler
-    instance.init({
+    const instance = new ExampleAssembler({
         foo : '123',
         bar : '456'
     })
@@ -126,8 +124,7 @@ test('Init by not defined property', t => {
 })
 
 test('Init by the default property', t => {
-    const instance = new ExampleAssembler
-    instance.init('123')
+    const instance = new ExampleAssembler('123')
     t.is(instance.foo, '123')
     t.is(instance.target.foo, '123')
     t.deepEqual(getTargetOf(new Assembler('will be ignored')), {})
