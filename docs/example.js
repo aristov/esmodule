@@ -1,3 +1,4 @@
+import '../lib/debug'
 import { Assembler } from '../lib'
 
 class HTMLAssembler extends Assembler {
@@ -6,7 +7,9 @@ class HTMLAssembler extends Assembler {
     }
 
     get children() {
-        return this.node.children
+        return Array.prototype.map.call(this.node.children, child => {
+            return Assembler.getInstanceOf(child)
+        })
     }
 
     get node() {
