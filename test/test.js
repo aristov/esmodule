@@ -34,6 +34,13 @@ class ExampleAssembler extends Assembler {
     }
 }
 
+ExampleAssembler.register()
+
+test('register', t => {
+    t.is(Assembler.Assembler, Assembler)
+    t.is(Assembler.ExampleAssembler, ExampleAssembler)
+})
+
 test('interface', t => {
     t.is(Assembler.interface, Object)
 })
@@ -159,8 +166,4 @@ test('Init by explicit target setting', t => {
     const instance = new ExampleAssembler({ target })
     t.is(instance.target, target)
     t.throws(() => new ExampleAssembler({ target : 'wrong' }))
-})
-
-test('Assembler.Assembler', t => {
-    t.is(Assembler.Assembler, Assembler)
 })
