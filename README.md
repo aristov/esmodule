@@ -10,6 +10,13 @@ _work in progress_
 
 Assembler is a simple class, which helps to assemble another JavaScript objects.
 
+## Examples
+
+- [docs/example.js](https://github.com/aristov/esmodule/blob/master/docs/example.js)
+- [dommodule](https://github.com/aristov/dommodule)
+- [urlmodule](https://github.com/aristov/urlmodule)
+
+
 ## Installation
 
 ```
