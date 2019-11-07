@@ -25,7 +25,7 @@ class ExampleAssembler extends Assembler {
         return Assembler.getTargetOf(this)
     }
 
-    static get defaultPropertyName() {
+    static get valuePropertyName() {
         return 'foo'
     }
 
@@ -38,8 +38,8 @@ test('interface', t => {
     t.is(Assembler.interface, Object)
 })
 
-test('defaultPropertyName', t => {
-    t.is(Assembler.defaultPropertyName, 'value')
+test('valuePropertyName', t => {
+    t.is(Assembler.valuePropertyName, 'value')
 })
 
 test('create', t => {

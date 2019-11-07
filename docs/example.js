@@ -20,7 +20,7 @@ class HTMLAssembler extends Assembler {
         return document.createElement(this.name.toLowerCase())
     }
 
-    static get defaultPropertyName() {
+    static get valuePropertyName() {
         return 'children'
     }
 
