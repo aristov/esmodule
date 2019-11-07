@@ -84,7 +84,7 @@ test('setProperty(name, undefined)', t => {
 test('setProperty(name, new String) -> setPropertyFallback', t => {
     const instance = new ExampleAssembler
     instance.setProperty('bar', '456')
-    t.is(instance.bar, undefined)
+    t.is(instance.bar, '456')
     t.is(instance.target.bar, '456')
 })
 
@@ -97,8 +97,10 @@ test('setProperty(name, undefined) -> setPropertyFallback', t => {
 
 test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
     const instance = new ExampleAssembler
-    t.throws(() => instance.setProperty('wiz', '789'))
-    t.throws(() => instance.setProperty('wiz', undefined))
+    instance.setProperty('wiz', '789')
+    instance.setProperty('bar', undefined)
+    t.is(instance.wiz, '789')
+    t.is(instance.bar, undefined)
 })
 
 test('Assign filtered property', t => {
@@ -114,13 +116,17 @@ test('Init by defined properties', t => {
     })
     t.is(instance.foo, '123')
     t.is(instance.target.foo, '123')
-    t.is(instance.bar, undefined)
+    t.is(instance.bar, '456')
     t.is(instance.target.bar, '456')
 })
 
 test('Init by not defined property', t => {
-    t.throws(() => new ExampleAssembler({ wiz : '789' }))
-    t.throws(() => new ExampleAssembler({ wiz : undefined }))
+    const instance = new ExampleAssembler({
+        wiz : '789',
+        bar : undefined
+    })
+    t.is(instance.wiz, '789')
+    t.is(instance.bar, undefined)
 })
 
 test('Init by the default property', t => {
