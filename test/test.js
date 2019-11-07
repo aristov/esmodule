@@ -140,13 +140,15 @@ test('Init by not defined property', t => {
     t.is(instance.bar, undefined)
 })
 
-test('Init by the default property', t => {
+test('Init by value property', t => {
     const instance = new Assembler('qwerty')
+    const target = Assembler.getTargetOf(instance)
     t.is(instance.value, 'qwerty')
+    t.is(target.value, undefined)
     t.deepEqual(Assembler.getTargetOf(instance), {})
 })
 
-test('Init by redefined default property', t => {
+test('Init by redefined value property', t => {
     const instance = new ExampleAssembler('123')
     t.is(instance.foo, '123')
     t.is(instance.target.foo, '123')
