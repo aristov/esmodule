@@ -3,8 +3,6 @@ import { Assembler } from '../lib/Assembler'
 
 let undefined
 
-const { getTargetOf } = Assembler
-
 class Example extends Object {}
 
 Example.prototype.foo = null
@@ -24,7 +22,7 @@ class ExampleAssembler extends Assembler {
     }
 
     get target() {
-        return getTargetOf(this)
+        return Assembler.getTargetOf(this)
     }
 
     static get defaultPropertyName() {
@@ -41,7 +39,7 @@ test('interface', t => {
 })
 
 test('defaultPropertyName', t => {
-    t.is(Assembler.defaultPropertyName, undefined)
+    t.is(Assembler.defaultPropertyName, 'input')
 })
 
 test('create', t => {
@@ -130,10 +128,15 @@ test('Init by not defined property', t => {
 })
 
 test('Init by the default property', t => {
+    const instance = new Assembler('qwerty')
+    t.is(instance.input, 'qwerty')
+    t.deepEqual(Assembler.getTargetOf(instance), {})
+})
+
+test('Init by redefined default property', t => {
     const instance = new ExampleAssembler('123')
     t.is(instance.foo, '123')
     t.is(instance.target.foo, '123')
-    t.deepEqual(getTargetOf(new Assembler('will be ignored')), {})
 })
 
 test('Init by explicit target setting', t => {
