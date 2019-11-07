@@ -39,7 +39,7 @@ test('interface', t => {
 })
 
 test('defaultPropertyName', t => {
-    t.is(Assembler.defaultPropertyName, 'input')
+    t.is(Assembler.defaultPropertyName, 'value')
 })
 
 test('create', t => {
@@ -101,6 +101,12 @@ test('setProperty -> setPropertyFallback -> setPropertyMismatch', t => {
     t.is(instance.bar, undefined)
 })
 
+test('Init by plain object', t => {
+    const value = { a : '123' }
+    const instance = new Assembler(value)
+    t.is(instance.__init, value)
+})
+
 test('Assign filtered property', t => {
     const instance = new ExampleAssembler({ nom : '777' })
     t.is(instance.nom, undefined)
@@ -118,6 +124,13 @@ test('Init by defined properties', t => {
     t.is(instance.target.bar, '456')
 })
 
+test('Init by property defined on target', t => {
+    const instance = new ExampleAssembler({ bar : '789' })
+    instance.bar = '123'
+    t.is(instance.bar, '123')
+    t.is(instance.target.bar, '123')
+})
+
 test('Init by not defined property', t => {
     const instance = new ExampleAssembler({
         wiz : '789',
@@ -129,7 +142,7 @@ test('Init by not defined property', t => {
 
 test('Init by the default property', t => {
     const instance = new Assembler('qwerty')
-    t.is(instance.input, 'qwerty')
+    t.is(instance.value, 'qwerty')
     t.deepEqual(Assembler.getTargetOf(instance), {})
 })
 
@@ -144,4 +157,8 @@ test('Init by explicit target setting', t => {
     const instance = new ExampleAssembler({ target })
     t.is(instance.target, target)
     t.throws(() => new ExampleAssembler({ target : 'wrong' }))
+})
+
+test('Assembler.Assembler', t => {
+    t.is(Assembler.Assembler, Assembler)
 })
